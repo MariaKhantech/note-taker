@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
+const { request } = require('http');
 
 //Sets up the express app and port
 const app = express();
@@ -46,12 +47,23 @@ app.post('/api/notes', (req, res) => {
 	res.sendFile(dbFile);
 });
 
-// app.delete('/api/notes', (req, res) => {
-// 	fs.readFile(dbFile, (err, data) => {
-// 		if (err) throw err;
-// 		console.log('file has been deleted');
-// 	});
-// });
+//deleting saved notes
+app.delete('/api/notes/:id', (req, res) => {
+	fs.readFile(dbFile, (err, data) => {
+		if (err) throw err;
+		let notesArray = JSON.parse(data);
+		//filtering out the deleted note to create a new array that does not include the deleted note
+		let newFilteredArray = notesArray.filter((note) => {
+			return note.id != req.params.id
+		
+		});
+		//take the updated array and write to file 
+		fs.writeFile(dbFile, JSON.stringify(newFilteredArray), (err) => {
+			if (err) throw err;
+		});
+	});
+	res.sendFile(dbFile);
+});
 
 //================HTML ROUTES======================//
 //creating HTML route for notes.html

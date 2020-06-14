@@ -1,7 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const { resolveSoa } = require('dns');
+const { v4: uuidv4 } = require('uuid');
+
 //Sets up the express app and port
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -31,9 +32,13 @@ app.post('/api/notes', (req, res) => {
 	fs.readFile(dbFile, (err, data) => {
 		if (err) throw err;
 		let notes = JSON.parse(data);
-		notes.push(req.body);
-		console.log(notes);
-
+		//adding id on to notes
+		let enteredNote = req.body;
+		//uuidv4 installed package that gives a random id to an entered note
+		enteredNote.id = uuidv4();
+		//adding a new note into the array of notes
+		notes.push(enteredNote);
+		//writing onto the dbfile and taking parse converting it to back stringy 
 		fs.writeFile(dbFile, JSON.stringify(notes), (err) => {
 			if (err) throw err;
 		});

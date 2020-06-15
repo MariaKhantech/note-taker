@@ -48,3 +48,6 @@ If you want to contact me you can reach me at <mariatechfuture@gmail.com>.
 ---
 ***Link for GitHub***
 https://mariakhantech.github.io/
+
+***Heroku link for demo:***
+https://quiet-harbor-00174.herokuapp.com/ 

@@ -43,6 +43,7 @@ If you want to contact me you can reach me at <mariatechfuture@gmail.com>.
 
 ## Example of use:
 
+![note-taker](https://user-images.githubusercontent.com/61640527/84608109-dc199d80-ae7e-11ea-86ac-502476b7a933.gif)
 
 ---
 ***Link for GitHub***
